@@ -35,7 +35,7 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - Has no additional charges
 - Root account:
     - Is the e-mail used to create the AWS account
-    - Has full access 
+    - Has full access (is not bounded to any IAM policies)
     - Should not be used for day to day activities (use IAM users instead)
 - You can configure federation to enable SSO
 - New users have no permissions by default, you need to set it up
@@ -71,3 +71,5 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - Security credentials available: AWS access key, X.509 certificate, SSH key (only for CodeCommit at the moment), password for web app logins, or a MFA device
 - You can't set usage quota for individual IAM users. Limits are set at the account level.
 - There is no limit to the number of IAM roles you can assume, but you can only act as one IAM role when making requests to AWS services
+- You can protect APIs with MFA, it is available for all AWS services that support temporary security credentials
+- MFA cannot be used with federated users
