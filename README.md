@@ -52,8 +52,10 @@ Preparation and study material to become AWS Certified Developer Associate
     - 5.1 Write code that can be monitored.
     - 5.2 Perform root cause analysis on faults found in testing or production.
 
-## Services
+## Services & Tools
+- [AWS CLI](tools/AWS-CLI.md)
 - [IAM](services/IAM.md)
 - [EC2](services/EC2.md)
 - [EBS](services/EBS.md)
 - [ELB](services/ELB.md)
+- [Route 53](services/Route53.md)

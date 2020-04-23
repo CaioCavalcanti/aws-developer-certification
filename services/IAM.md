@@ -73,3 +73,5 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - There is no limit to the number of IAM roles you can assume, but you can only act as one IAM role when making requests to AWS services
 - You can protect APIs with MFA, it is available for all AWS services that support temporary security credentials
 - MFA cannot be used with federated users
+- Do not share access keys and secrets, create one per user
+- If you publish your key and secret by mistake on github, assume that it is compromised and reveoke it right away, as there are bots scanning repositories to get keys/secrets
