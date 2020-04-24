@@ -56,3 +56,6 @@ Provides resizable compute capacity in the cloud, reducing the time required to 
 |C5|Compute optimized|CPU intensive apps/DBs|
 |P3|Graphics/General purpose GPU|Machine learning, bitcoin mining|
 |X1|Memory optimized|SAP HANA, Apache Spark, etc|
+
+## General Notes
+- You can attach and detach roles to running EC2 instances without stopping or terminating those instances

@@ -75,3 +75,5 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - MFA cannot be used with federated users
 - Do not share access keys and secrets, create one per user
 - If you publish your key and secret by mistake on github, assume that it is compromised and reveoke it right away, as there are bots scanning repositories to get keys/secrets
+- Roles allow you to not use access key id and secret and **are preferred from a security perspective**
+- Changes on a policy take effect immediately
