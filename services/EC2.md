@@ -4,6 +4,31 @@ Provides resizable compute capacity in the cloud, reducing the time required to 
 
 ## Useful links
 - [AWS - EC2 FAQ](https://aws.amazon.com/ec2/faqs/)
+- [AWS - EC2 Best Practices](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)
+
+## Best Practices
+- **Security**
+    - Manage access using identity federation, IAM users and IAM roles
+    - Establish credential management policies and procedures for creating, distributing, rotating and revoking AWS access credentials
+    - Implement least permissive rules for your security group
+    - Regularly patch, update and secure operating system and applications on your instance
+- **Storage**
+    - Understand the implications of the root device type for data persistence, backup and recovery
+    - Use separate EBS volumes for the operating system versus your data and ensure the volume with your data persists after instance termination
+    - Use the instance store available for your instance to store temporary data.
+        - Remember that data stored in instance store is deleted when you stop or terminate the instance
+    - If you use instance store for database store, ensure that you have a cluster with a replication factor that ensures fault tolerance
+    - Encrypt EBS volumes and snapshots
+- **Resource Management**
+    - Use instance metadata and custom resource tags to track and identify your AWS resources
+    - View your current limits for EC2 and plan to request any limiti increases in advance of the time you'll need them
+- **Backup and recovery**
+    - Regularly backup your EBS volumes using snapshots and create an Amazon Machine Image (AMI) from your instance to save the configuration as a template for launching future instances
+    - Deploy critical components of your application accross multiple Availability Zones and replicate your data appropriately
+    - Design your apps to handle dynamic IP addressing when your instances restarts
+    - Monitor and respond to events
+    - Ensure that you are prepared to handle failover
+    - Regularly test the process of recovering your instances and EBS volumes if they fail
 
 ## Pricing options
 ### On Demand
@@ -59,3 +84,5 @@ Provides resizable compute capacity in the cloud, reducing the time required to 
 
 ## General Notes
 - You can attach and detach roles to running EC2 instances without stopping or terminating those instances
+- There's a limit of on-demand instances based on vCPUs used per region
+- EC2 restricts e-mail traffic over port 25 by default. You can still send e-mails using a different port or using Amazon Simple Email Service (SES)

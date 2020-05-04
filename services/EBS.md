@@ -24,3 +24,16 @@ Storage volume for EC2 instances
     - Lowest cost per gigabyte of all EBS volume types *that is bootable*
     - Ideal for workload where data is accessed infrequently and the lowest storage cost is important
     - Previous generation
+
+## General Notes
+- EBS volume can persist independently of the life of the EC2 instance, different from the local instance store, which persists only as long as the instance is alive
+- If you are using an EBS volume as root partition, set "Delete on termination" to no if you want to persist the data out of the EC2 instance lifetime
+- Snapshots can be taken in real time while the volume is attached and in use. However, snapshots only capture data that has been written to the volume, which might exclude data that has been lolcally cached by your app or OS
+    - To ensure a consistent snapshot, it's recommended to detach the volume or shutdown the instance if it's a root volume
+- The time taken to create a snapshot depends on several factors, including the amount of data that has changed since the last snapshot
+- Each snapshot is given an unique identifier, so customer can do a point-in-time recovery
+- Snapshots can be shared or private
+- **Fast Snapshot Restore (FSR)** improves performance whenever you need to restore data from a snapshot, it is intended for VDI, test/dev volume copies and booting from custom AMIs.
+    - It does not impact snapshot creation time, only restore
+    - There is a limit on the number of volumes that can be created with immediate full performance
+- EBS enables encryption at rest using Amazon-managed keys or your own keys using Amazon KMS
