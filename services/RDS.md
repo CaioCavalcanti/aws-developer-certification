@@ -3,6 +3,7 @@ RDS makes it easy to setup, operate and scale relational databases on cloud, by 
 
 ## Useful links
 - [AWS - RDS FAQ](https://aws.amazon.com/rds/faqs/)
+- [AWS - Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
 
 ## Supported Databases
 - Microsoft SQL Server

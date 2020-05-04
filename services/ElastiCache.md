@@ -3,6 +3,8 @@ It's a web service that makes it easy to deploy, operate and scale in-memory cac
 
 ## Useful Links
 - [AWS - ElastiCache FAQ](https://aws.amazon.com/elasticache/faqs/)
+- [AWS - ElastiCache for Redis - Caching Strategies and Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html)
+- [AWS - ElastiCache for Memcached - Caching Strategies and Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/BestPractices.html)
 - [Memcached](https://memcached.org/)
 - [Redis](https://redis.io/)
 
