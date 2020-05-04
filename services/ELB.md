@@ -12,6 +12,8 @@ It can handle the varying load of your application traffic in a single Availabil
 - Operate at individual request level (Layer 7) and are application-aware
 - Can be used to create advanced request routing, sending specific requests to specific web servers
 - Routes traffic to targets within VPC based on the content of the request
+- Supports WebSockets and Secure WebSockets
+- Request tracing is enabled by default
 
 ### Network load balancer
 - Best suited for TCP traffic where **extreme performance** is required
@@ -23,7 +25,7 @@ It can handle the varying load of your application traffic in a single Availabil
 - Legacy, not recommended
 - Can be used for both HTTP/HTTPS (Layer 7) and TCP (Layer 4)
 
-## Notes
+## General Notes
 - When a classic load balancer stops responding, it responds with a 504 error (Gateway timeout). This means that the app is not responsing within the idle timeout period
 - You can use the header **X-Forwarded-For** to get the IPv4 address of your end user
 
