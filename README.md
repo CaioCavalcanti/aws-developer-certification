@@ -63,3 +63,5 @@ Preparation and study material to become AWS Certified Developer Associate
 - [ElastiCache](services/ElastiCache.md) 
 - [S3](services/S3.md)
 - [CloudFront](services/CloudFront.md)
+- [Lambda](services/Lambda.md)
+- [API Gateway](services/ApiGateway.md)
