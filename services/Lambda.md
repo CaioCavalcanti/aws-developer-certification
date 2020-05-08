@@ -71,3 +71,17 @@ Lets you run your code without provisioning or managing servers or containers, y
     - AWS IoT
     - AWS IoT Events
     - AWS CodePipeline
+
+## Vesion Control
+- You can publish one or more versions of your Lambda function
+- These versions can be used as different stages of your development workflow, such as development, qa and production
+- Each Lambda function has an **unique Amazon Resource Name (ARN)**, after publishing a version, **it is immutable**
+- The latest function code is in **$LATEST version**, when you update your function code, it **replaces the code in $LATEST**
+- You can refer to a Lambda function using its ARN. There are two types of ARN associated with the latest version
+    - **Qualified ARN**: the function ARN with the version suffix
+        - arn:aws:lambda:aws-region:acct-id:function:helloworld:$LATEST
+    - **Unqualified ARN**: the function ARN without the version suffix
+        - arn:aws:lambda:aws-region:acct-id:function:helloworld
+- You can set **alias** to a specific version and use it to map different stages, such as **PROD**, **QA** and **DEV** for example, remapping the alias as you promote changes between environments
+    - You can **shift traffic** between two versions, based on weights (%), this is useful for **A/B testing/Blue-Green deployments**
+    - Cannot split traffic using $LATEST, you'll need to create an alias to latest
