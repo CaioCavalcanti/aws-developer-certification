@@ -64,5 +64,6 @@ Preparation and study material to become AWS Certified Developer Associate
 - [S3](services/S3.md)
 - [CloudFront](services/CloudFront.md)
 - [Lambda](services/Lambda.md)
+- [Step Functions](services/Step-Functions.md)
 - [API Gateway](services/ApiGateway.md)
 - [Polly](services/Polly.md)
