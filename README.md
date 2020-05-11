@@ -65,3 +65,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [CloudFront](services/CloudFront.md)
 - [Lambda](services/Lambda.md)
 - [API Gateway](services/ApiGateway.md)
+- [Polly](services/Polly.md)
