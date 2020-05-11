@@ -4,6 +4,7 @@ Lets you run your code without provisioning or managing servers or containers, y
 ## Useful Links
 - [AWS - Lambda FAQs](https://aws.amazon.com/lambda/faqs/)
 - [AWS - Best Practices for Working with AWS Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+- [AWS - Serverless Architectures with AWS Lambda whitepaper](https://d1.awsstatic.com/whitepapers/serverless-architectures-with-aws-lambda.pdf)
 - [AWS Architecture Blog - How to Design Your Serverless Apps for Massive Scale](https://aws.amazon.com/blogs/architecture/how-to-design-your-serverless-apps-for-massive-scale/)
 
 ## General Notes

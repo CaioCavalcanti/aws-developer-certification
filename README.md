@@ -5,6 +5,8 @@ Preparation and study material to become AWS Certified Developer Associate
 - [AWS - Certified Developer Associate Overview](https://aws.amazon.com/certification/certified-developer-associate/)
 - [AWS - Certified Developer–Associate (DVA-C01) Examination Guide](https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_Certified_Developer_Associate-Exam_Guide_EN_1.4.pdf)
 - [AWS - Whitepapers](https://aws.amazon.com/whitepapers)
+- [AWS - Exam Readiness: AWS Certified Developer - Associate](https://www.aws.training/Details/Curriculum?id=19185) (Free online course)
+- [AWS Training](https://www.aws.training/)
 - [Udemy Course - AWS Certified Developer - Associate 2020](https://www.udemy.com/course/aws-certified-developer-associate/)
 - [Whizlab Practice Tests - AWS Certified Developer Associate](https://www.whizlabs.com/aws-developer-associate/practice-tests/)
 
@@ -17,7 +19,7 @@ Preparation and study material to become AWS Certified Developer Associate
     - Study at least 30min everyday
     - Take the time to focus only on that: no phone, no social media, no multitasking
     - Keep track of the days you studied and compensate in the next day if necessary
-3. Take the preparation course on Udemy and make sure that for each subject you:
+3. Take the preparation course on Udemy and AWS training and make sure that for each subject you:
     - Put the hands-on and do the labs
     - Read related whitepapers and FAQs in AWS
     - Take the practice tests, if any available specifically for the subject
@@ -67,3 +69,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [Step Functions](services/Step-Functions.md)
 - [API Gateway](services/ApiGateway.md)
 - [Polly](services/Polly.md)
+- [X-Ray](services/X-Ray.md)
