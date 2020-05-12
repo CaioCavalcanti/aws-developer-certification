@@ -21,3 +21,10 @@ Is a fully managed service that makes it easy for developers to publish, maintai
 - Supports **AWS Certificate Manager** for SSL/TLS certificates
 - You can enable **API Caching** to cache your endpoint's response to **reduce the number of calls** made to your endpoint and also **improve latency**
 - When using JS/AJAX that uses multiple domains with API Gateway, ensure that **CORS is enabled**
+- You can use **API Gateway Import API** feature to import an API from an external definition file into API Gateway.
+    - Supports Swagger v2.0 definition files
+- **API Throttling**
+    - Limits the steady-state request rate to **10,000 requests per second by default**
+    - The **maximum concurrent requests is 5,000** across all APIs within an AWS account
+    - If you go over the limit you will receive a **429 Too Many Requests** error response
+- You can use API Gateway as a **SOAP web service passthrough**

@@ -5,6 +5,7 @@ For any traced request to your application, you can see detailed information not
 
 ## Useful Links
 - [AWS - X-Ray FAQs](https://aws.amazon.com/xray/faqs/)
+- [YouTube - AWS re:Invent 2017: Deep-Dive for AWS X-Ray](https://www.youtube.com/watch?time_continue=6&v=QNlkAClqYiY)
 
 ## General Notes
 - X-Ray SDK provides:
