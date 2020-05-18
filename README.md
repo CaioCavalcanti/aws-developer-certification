@@ -70,3 +70,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [API Gateway](services/ApiGateway.md)
 - [Polly](services/Polly.md)
 - [X-Ray](services/X-Ray.md)
+- [DynamoDB](services/DynamoDB.md)

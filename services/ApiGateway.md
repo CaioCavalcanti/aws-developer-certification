@@ -27,4 +27,5 @@ Is a fully managed service that makes it easy for developers to publish, maintai
     - Limits the steady-state request rate to **10,000 requests per second by default**
     - The **maximum concurrent requests is 5,000** across all APIs within an AWS account
     - If you go over the limit you will receive a **429 Too Many Requests** error response
+    - You can throttle using individual API keys, limiting individual clients
 - You can use API Gateway as a **SOAP web service passthrough**
