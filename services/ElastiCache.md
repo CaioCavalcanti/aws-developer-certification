@@ -30,3 +30,21 @@ It's a web service that makes it easy to deploy, operate and scale in-memory cac
         - Caching model as simple as possible
         - Large cache nodes, requiring multithreaded performance with utilization of multiple cores
         - Ability to scale out
+- **TTL** specifies the number of seconds until the data expires, to avoid keeping stale data in the cache. It does not elimitate stale data, but helps avoid it
+- Caching strategies
+    - **Lazy loading** loads the data into the cache only when necessary
+        - Treats an expired key as cache miss and causes the application to retrieve the data from the backend, subsequentially writing into the cache with a new TTL
+        - Pros:
+            - Only requested data cached: avoid filling up cache with useless data
+            - Node failures are not fatal, a new empty node will just have a lot of cache misses initially
+        - Cons:
+            - Cache miss penalty: initial request, query to database and writing of data to the cache
+            - Stale data: if data is only updated when there is a cache miss, it can become stale. It doesn't automatically update if the data in the database changes
+    - **Write-through** adds or updates data to the cache whenever data is written to the backend
+        - Pros:
+            - Cached data is never stale
+            - Users are generally more tolerant of additional latency when uploading data than when retrieving it
+        - Cons:
+            - Write penalty: every write involves a write to the cache as well as a write to the database
+            - If a node fails and a new one is spun up, data is missing until added or updated (mitigate by implementing lazy loading in conjunction)
+            - Wasted resources if most of the data is never read
