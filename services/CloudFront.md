@@ -3,6 +3,7 @@ It's a content delivery network (CDN), a system of distributed servers that deli
 
 ## Useful Links
 - [AWS - CloudFront FAQ](https://aws.amazon.com/cloudfront/faqs)
+- [AWS - Using Alternate Domain Names and HTTPS](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-alternate-domain-names.html)
 
 ## General Notes
 - Can be used to delivery your entire website, including dynamic, static, streaming and interactive content using AWS global network of edge locations
@@ -22,3 +23,5 @@ It's a content delivery network (CDN), a system of distributed servers that deli
 - You can **restrict bucket access** to enforce all requests to go through CloudFront
 - You can **restrict content access** using **signed URLs or signed cookies**, a common use case is to distribute paid content
 - **Geo-Restrictions** can be used to allow/deny access per geographic location
+- You can use alternate domains names with HTTPS
+    - If you want to require HTTPS between viewers and CloudFront, you must **change the AWS Region to US East (N. Virginia) in the AWS Certificate Manager** console before you request or import a certificate
