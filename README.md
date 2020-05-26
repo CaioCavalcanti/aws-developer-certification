@@ -71,3 +71,5 @@ Preparation and study material to become AWS Certified Developer Associate
 - [Polly](services/Polly.md)
 - [X-Ray](services/X-Ray.md)
 - [DynamoDB](services/DynamoDB.md)
+- [KMS](services/KMS.md)
+- [ACM](services/ACM.md)
