@@ -75,3 +75,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [ACM](services/ACM.md)
 - [SQS](services/SQS.md)
 - [SNS](services/SNS.md)
+- [SES](services/SES.md)
