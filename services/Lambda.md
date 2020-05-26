@@ -8,6 +8,8 @@ Lets you run your code without provisioning or managing servers or containers, y
 - [AWS Architecture Blog - How to Design Your Serverless Apps for Massive Scale](https://aws.amazon.com/blogs/architecture/how-to-design-your-serverless-apps-for-massive-scale/)
 - [AWS - Building a continuous delivery pipeline for a Lambda application with AWS CodePipeline](https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html)
 - [YoutTube - Start Right: Automate Your Serverless Application Deployments Using AWS SAM](https://www.youtube.com/watch?v=0o3urdBeoII)
+- [AWS Online Tech Talks - Optimizing Lambda Performance for Your Serverless Application](https://pages.awscloud.com/Optimizing-Lambda-Performance-for-Your-Serverless-Applications_2020_0316-SRV_OD.html)
+- [AWS Online Tech Talks - Choosing Events, Queues, Topics, and Streams in Your Serverless Application](https://pages.awscloud.com/Choosing-Events-Queues-Topics-and-Streams-in-Your-Serverless-Application_2020_0420-SRV_OD.html)
 
 ## General Notes
 - Brief history:
