@@ -76,3 +76,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [SQS](services/SQS.md)
 - [SNS](services/SNS.md)
 - [SES](services/SES.md)
+- [Elastic Beanstalk](services/ElasticBeanstalk.md)
