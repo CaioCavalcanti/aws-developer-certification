@@ -1,0 +1,81 @@
+# AWS CodeDeploy
+CodeDeploy is a fully managed deployment service that automates software deployments to a variety of compute services, such as EC2, Lambda and on-premise servers.
+
+## Useful Links
+- [AWS - CodeDeploy FAQs](https://aws.amazon.com/codedeploy/faqs)
+- [AWS - CodeDeploy Deployments](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps.html)
+- [AWS - AppSpec 'hooks' Section](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html)
+
+## General Notes
+- Deployment approaches:
+    - **In-Place**
+        - Application is stopped on each instance and the new release is installed
+        - Known as **rolling update**
+        - Reduces capacity during deployment
+            - Stop instance (remove from ELB)
+            - Install **new revision** on stopped instance
+            - Start instance (adds back to ELB)
+            - Continues to deploy to next instance
+        - For **rollback** you need to **re-deploy the previous version**
+        - **Not supported for Lambda**
+        - Great for deploying for the first time and for dev/test environments
+    - **Blue/Green**
+        - New instances are provisioned and the new release is installed on the new instances
+        - Blue represents the active deployment, green is the new release
+        - Seamless approach, doesn't impact capacity
+            - Create new instances (green)
+            - Install new revision on new instances
+            - Adds new instances to ELB
+            - Traffic is routed away from the old instances (blue)
+            - Old instances are removed from ELB and terminated
+        - For **rollback** just make ELB **route traffic back to the original (blue) environment**
+            - Only possible if you haven't already terminated the old instances
+        - You **pay for 2 environments until you terminated the old instances**
+        - **Safest option for production envrionment**
+- **AppSpec** file is a configuration file that **defines the parameters** to be used during deployment
+    - For EC2 and on-prem systems, only YAML is supported
+    - For Lambda and ECS, both YAML and JSON are supported
+    - It is used to manage each deployment as a series of lifecycle event hooks, which are defined on the event hooks
+    - The event hooks and file structure depends on the target (EC2, Lambda or ECS)
+    - The `appspec.yml` file **must be placed in the root of the directory of your revision**
+
+## Lifecycle Event Hooks
+- Lifecycle event hooks are run in a specific order known as **run order**
+- You don't need to use all hooks, just pick the ones that make sense for your application deployment process
+- For the exam is good to have a high level understanding of the logical flow and the run order
+- Some events cannot be scripted, you can just specify files to reference
+- **EC2**
+    - In-place deployment works in 3 broadly phases
+    - **Phase 1**: de-register instances from ELB
+        - `BeforeBlockTraffic`: tasks you want to run on instances before they are de-registered from ELB 
+        - `BlockTraffic`: de-register instances from ELB
+        - `AfterBlockTraffic`: tasks you want to run on instances after they are de-registered
+    - **Phase 2**: actual deployment
+        - `ApplicationStop`: tasks you need to run to gracefully stop your application
+        - `DownloadBundle`: CodeDeploy agent copies the application revision files to a temporary location
+        - `BeforeInstall`: pre-install scripts, e.g. decrypting files, backing up current version
+        - `Install`: copy application revision files to final location
+        - `AfterInstall`: post-install scripts, e.g. configuration, file permissions, etc
+        - `ApplicationStart`: start any services that were stopped during `ApplicationStop`
+        - `ValidateService`: run tests to validate the service
+    - **Phase 3**: re-register instances in ELB
+        - `BeforeAllowTraffic`: tasks you want to run on instances before they are re-registered in ELB
+        - `AllowTraffic`: re-register instances in ELB
+        - `AfterAllowTraffic`: tasks you want to run on instances after they are re-registered to ELB
+- **ECS**
+    - The event hooks actions are Lambda functions
+    - `BeforeInstall`
+    - `Install`
+    - `AfterInstall`
+    - `AllowTestTraffic`
+    - `AfterAllowTestTraffic`
+    - `BeforeAllowTraffic`
+    - `AllowTraffic`
+    - `AfterAllowTraffic`
+- **Lambda**
+    - The event hooks actions are Lambda functions
+    - `BeforeAllowTraffic`
+    - `AllowTraffic`
+    - `AfterAllowTraffic`
+    - The function needs to use CodeDeploy SDK to get the deployment id and event hook id and return a validation test result, with either 'Succeeded' or 'Failed'
+    - The deployment fails if CodeDeploy is not notified by the Lambda function within one hour

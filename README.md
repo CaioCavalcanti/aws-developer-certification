@@ -79,3 +79,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [Elastic Beanstalk](services/ElasticBeanstalk.md)
 - [Kinesis](services/Kinesis.md)
 - [CodeCommit](services/CodeCommit.md)
+- [CodeDeploy](services/CodeDeploy.md)
