@@ -29,6 +29,26 @@ CloudFormation is a service that allows you to manage, configure and provision y
     - Execute change set
 - Use CloudFormation whenever is possible, it will save you time setting up and tearing down, if necessary
 - You can use **designer** on browser to create the template
+- **Nested stacks** are stacks that create other stacks and allows re-use of CloudFormation code for common use cases
+    - For example: standard configuration for a load balancer, web server, app server, etc
+    - It's a **recommended practice**
+    - Template example:
+```yaml
+Resources:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+        # ARN for SNS topic to send notification about the stack
+        NotificationARNs: 
+            - String
+        # CloudFormation Stack Parameters
+        Parameters: 
+        # Tag for the stack
+        Tags: 
+            - Resource Tag 
+        # URL for template hosted in S3 (mandatory)
+        TemplateURL: https://s3.amazonaws.com/.../template.yml
+        TimeoutInMinutes: Integer
+```
 
 ## Template Structure
 ```yml
