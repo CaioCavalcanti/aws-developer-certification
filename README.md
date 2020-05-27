@@ -80,3 +80,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [Kinesis](services/Kinesis.md)
 - [CodeCommit](services/CodeCommit.md)
 - [CodeDeploy](services/CodeDeploy.md)
+- [CodePipeline](services/CodePipeline.md)
