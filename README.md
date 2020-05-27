@@ -84,3 +84,4 @@ Preparation and study material to become AWS Certified Developer Associate
 - [CodePipeline](services/CodePipeline.md)
 - [ECS](services/ECS.md)
 - [CloudFormation](services/CloudFormation.md)
+- [SAM](tools/SAM.md)
