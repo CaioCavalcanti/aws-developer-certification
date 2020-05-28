@@ -31,6 +31,9 @@ Developers can focus on writing code and don't need to worry about any of the un
         - Allow you to tear down your application environment without affecting the database instance
         - **Requires an additional security group** must be added to the environment's Auto Scaling group
         - **You need to provide connection string configuration** using environment properties
+- Supports deployment of **Docker containers**
+    - **Single container**: runs the Docker container on an EC2 instance provisioned by Elastic Beanstalk
+    - **Multiple containers**: Elastic Beanstalk will build an ECS cluster and deploy multiple Docker containers on each instance
 
 ## Deployment policies
 - **All at once**
