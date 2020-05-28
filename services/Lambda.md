@@ -48,6 +48,19 @@ Lets you run your code without provisioning or managing servers or containers, y
     - AWS X-Ray allows you to debug
     - Additional effort to test, deploy and manage multiple environments as the application grows
 - Lambda can do things globally, such as backing up S3 buckets to different regions
+- There is a concurrent execution limit that **limits the number of concurrent executions across all functions in a given region per account**
+    - Default to 1,000
+    - Returns TooManyRequestsException, HTTP Status Code 429
+    - You can request a limit increase to AWS Support Center
+    - You can **reserve concurrency** to guarantee that a set number of executions will always be available for your critical function. But it still acts as a limit
+- You can enable Lambda to access **VPC resources**, allowing the function to connect to the private subnet
+    - You need the following VPC configuration:
+        - Private subnet ID
+            - Is recommended to select at least two subnets in different AZs for high availability
+        - Security group ID (with required access)
+            - The lambda execution role needs permission to create the ENIs
+        - Lambda uses this info to setup an Elastic Network Interface (ENI) using an available IP address from your subnet
+    - `aws lambda update-function-configuration --function-name my-function --vpc-config SubnetIds=subnet-123abc,SecurityGroupIds=sg-123456`
 
 ## Triggers
 - Services that **Lambda reads event from**:
