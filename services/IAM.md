@@ -1,29 +1,6 @@
 # Identity Access Management
 IAM makes is easy to provide users secure access to your AWS resources, by enabling you to manage IAM users and their access and manage federated users.
 
-It's available at `AWS Console > Services > Security, Identity & Compliance > IAM`
-
-## Critical Terms
-- Users: end users (people)
-- Groups: a collection of users under one set of permissions
-- Roles: used to define a set of permissions to AWS resources
-- Policies: a document that defines one or more permissions. It can be attached to an user, group or/and role.
-
-## Best practices
-- Follow security checklist after creating a new account
-    - Delete your root access keys
-        - Is usually done automatically
-    - Enable multi factor authentication (MFA) on root account
-    - Create individual IAM users
-    - Use groups to assign permissions
-    - Apply an IAM password policy
-- Rotate credentials regularly
-- Grant least privilege
-- Use roles to delegate permissions
-- Monitor activity in your AWS account
-- Create an administrator user to manage users, so you don't need to use the root account
-- Use policy simulator to test policy changes to ensure they have the desired effect before committing them to production
-
 ## Useful links
 - [AWS - IAM FAQ](https://aws.amazon.com/iam/faqs/)
 - [AWS - IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
@@ -76,7 +53,7 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - MFA cannot be used with federated users
 - Do not share access keys and secrets, create one per user
 - If you publish your key and secret by mistake on github, assume that it is compromised and reveoke it right away, as there are bots scanning repositories to get keys/secrets
-- Roles allow you to not use access key id and secret and **are preferred from a security perspective**
+- **Roles** allow you to not use access key id and secret and **are preferred from a security perspective**
 - Changes on a policy take effect immediately
 -  **Web Identity Federation** lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider (IdP), such as Amazon, Facebook or Google
     - Following a successful authentication, the user receives an authentication code from the IdP, which they can trade for temporary AWS security credentials
@@ -103,3 +80,29 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
     - One of the STS actions is `AssumeRoleWithWebIdentity`, which returns temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider, such as Cognito, Amazon, Facebook, Google or any OIDC-compatible identity provider
         - By default, the security credentials created by `AssumeRoleWithWebIdentity` **last for one hour**, but you can configure it using the parameter `DurationSeconds`, from 15 minutes up to the maximum session duration setting for the role, which can be from 1 hour to 12 hours.
         - The token created returns `AssumedRoleUser` ARN and `AssumedRoleID`, which are used to reference the temporary credentials, instead of an IAM role or user
+- **IAM Policy Simulator** allows you to:
+    - Test the effects of IAM policies before committing them to production
+    - Validate that the policy works as expected
+    - Test policies already attached yo existing users
+        - Great for troubleshooting an issue which you suspect is IAM related
+
+## Critical Terms
+- Users: end users (people)
+- Groups: a collection of users under one set of permissions
+- Roles: used to define a set of permissions to AWS resources
+- Policies: a document that defines one or more permissions. It can be attached to an user, group or/and role.
+
+## Best practices
+- Follow security checklist after creating a new account
+    - Delete your root access keys
+        - Is usually done automatically
+    - Enable multi factor authentication (MFA) on root account
+    - Create individual IAM users
+    - Use groups to assign permissions
+    - Apply an IAM password policy
+- Rotate credentials regularly
+- Grant least privilege
+- Use roles to delegate permissions
+- Monitor activity in your AWS account
+- Create an administrator user to manage users, so you don't need to use the root account
+- Use policy simulator to test policy changes to ensure they have the desired effect before committing them to production
