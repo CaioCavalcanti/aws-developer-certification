@@ -87,3 +87,5 @@ Preparation and study material to become AWS Certified Developer Associate
 - [SAM](tools/SAM.md)
 - [Cognito](services/Cognito.md)
 - [CloudWatch](services/CloudWatch.md)
+- [CloudTrail](services/CloudTrail.md)
+- [Config](services/Config.md)
