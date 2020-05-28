@@ -26,3 +26,9 @@ Cognito provides authentication, authorization and user management for your web 
     - You can use both separately or together
 - Cognito tracks the association between user identity and the various different devices they sign-in from and it uses **push synchronization** to push updates and synchronize user data across multiple devices
     - It uses **SNS to send a silent push notification** to all the devices associated with a given user identity whenever data stored in the cloud changes
+- Pricing
+    - Pay as you go, no minimum fees or upfront commitments
+    - User Pools
+        - You pay based on your **monthly active users (MAU)**
+        - Free tier includes 50,000 MAUs, doesn't expire at the end of the 12-month AWS free tier term
+        - After 50,000 users you pay per MAU, according to region and tier, starting at $0.0055 per MAU from 50,001 to 100,000 users
