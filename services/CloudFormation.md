@@ -28,6 +28,7 @@ CloudFormation is a service that allows you to manage, configure and provision y
     - View change set
     - Execute change set
 - Use CloudFormation whenever is possible, it will save you time setting up and tearing down, if necessary
+- When the deployment fails, CloudFormation will rollback the entire stack by default
 - You can use **designer** on browser to create the template
 - **Nested stacks** are stacks that create other stacks and allows re-use of CloudFormation code for common use cases
     - For example: standard configuration for a load balancer, web server, app server, etc

@@ -29,6 +29,7 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - [AWS - IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 - [AWS - IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
 - [AWS - IAM Policy Simulator](https://policysim.aws.amazon.com)
+- [AWS - Security Token Service - AssumeRoleWithWebIdentity](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html)
 
 ## General Notes
 - IAM is universal, does not apply to individual regions
@@ -77,3 +78,28 @@ It's available at `AWS Console > Services > Security, Identity & Compliance > IA
 - If you publish your key and secret by mistake on github, assume that it is compromised and reveoke it right away, as there are bots scanning repositories to get keys/secrets
 - Roles allow you to not use access key id and secret and **are preferred from a security perspective**
 - Changes on a policy take effect immediately
+-  **Web Identity Federation** lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider (IdP), such as Amazon, Facebook or Google
+    - Following a successful authentication, the user receives an authentication code from the IdP, which they can trade for temporary AWS security credentials
+    - It is provided by **Amazon Cognito**
+- There are **three different types of IAM policies** available:
+    - **Managed Policies**
+        - Is **created and administered by AWS**
+        - Provided for common use cases based on job function, e.g. AmazonDynamoDBFullAccess, AWSCodeCommitPowerUser
+        - Help you assign appropriate permissions to your users, groups and roles without having to write the policy yourself
+        - A single managed policy **can be attached to multiple users, groups or roles within the AWS account and across different accounts**
+        - **You cannot change the permissions** defined in a managed policy
+    - **Customer Managed Policies**
+        - Is a **standalone policy that you create and administer inside your own AWS account**
+        - You can attach this policy to multiple users, groups and roles, but **only within your AWS account**
+        - You can copy an existing AWS managed policy and customize it to fit the requirements of your organization
+        - Recommended for use cases where the existing AWS managed policies don't meet the needs of your environment
+    - **Inline Policies**
+        - Is an IAM policy which is actually **embedded with the user, group or role to which it applies**
+        - There is a strict 1:1 relationship between the entity and the policy
+        - When you delete the user, group or role in which the inline policy is embedded, **the policy will also be deleted**
+        - In most cases, AWS recommends using managed policies over inline policies
+        - This policy is useful when you want to **be sure that the permissions in the policy are not inadvertently assigned to any other user, group or role** than the one for which it was created
+    - Provices **Security Token Service (STS)** web service to **request temporary, limited-privilege credentials for IAM users or federated users.
+    - One of the STS actions is `AssumeRoleWithWebIdentity`, which returns temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider, such as Cognito, Amazon, Facebook, Google or any OIDC-compatible identity provider
+        - By default, the security credentials created by `AssumeRoleWithWebIdentity` **last for one hour**, but you can configure it using the parameter `DurationSeconds`, from 15 minutes up to the maximum session duration setting for the role, which can be from 1 hour to 12 hours.
+        - The token created returns `AssumedRoleUser` ARN and `AssumedRoleID`, which are used to reference the temporary credentials, instead of an IAM role or user

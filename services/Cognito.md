@@ -5,6 +5,7 @@ Cognito provides authentication, authorization and user management for your web 
 - [AWS - Security Best Practices for Amazon Cognito User Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/managing-security.html)
 - [AWS - Common Amazon Cognito Scenarios](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-scenarios.html)
 - [YouTube - AWS re:Invent 2016: Serverless Authentication and Authorization: Identity Management (MBL306)](https://www.youtube.com/watch?v=n4hsWVXCuVI)
+- [Ten Mile Square Blog - AWS SAM API with Cognito](https://tenmilesquare.com/aws-sam-api-with-cognito/)
 
 ## General Notes
 - Acts as an **identity broker**, handling all interaction with web identity providers
