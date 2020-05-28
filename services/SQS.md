@@ -42,3 +42,21 @@ You can use SQS to send, store and receive messages between software components 
         - Sends an **empty response only if the polling wait time expires**
         - Can save money
 - **Long polling** is a way to retrieve messages from your SQS queues
+- You can use **SQS Delay Queues** to postpone delivery of new messages for a number of seconds
+    - Messages sent to delay queue **remain invisible to consumers** for the duration of the delay period
+    - **Default delay is 0 seconds, maximum is 15 minutes**
+    - For standard queues, changing this setting doesn't affect the delay of messages already in the queue, only for new messages
+    - For FIFO queues, this affects all messages already in the queue
+    - Has the same goal as the visibility timeout, to make messages unavailable to consumers for a specific period of time
+- The **difference between delay queues and visibility timeout** is that, for delay queues, a message is hidden *when it is first added to queue*, whereas for visibility timeouts a message is hidden *only after it is consumed from the queue*
+- You should use delay queues when:
+    - You are working with a large distributed application which may need to introduce a delay in processing
+    - You need to apply a delay to an entire queue of messages
+    - For example, adding a delay of a few seconds, to allow for updates to your sales and stock control databases before sending a notification to a customer confirming an online transaction
+- For **large SQS messages**, you need to use **S3, AWS SDK for Java and Amazon SQS Extended Client Library for Java**
+    - This is especially useful for storing and consuming **messages up to 2GB** in size
+    - Allows you to:
+        - Specify whether messages are always stored in S3 or only when the message size exceeds 256 KB
+        - Send a message that references a single message object stored in an S3 bucket
+        - Get and delete the corresponding message object from S3
+    - You **can't manage large messages from any other tool**, such as AWS CLI, AWS/SQS Console, SQS API or any other AWS SDK
