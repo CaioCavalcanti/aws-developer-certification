@@ -27,3 +27,13 @@ For any traced request to your application, you can see detailed information not
     - .NET
 - It always **encrypts traces and related data at rest**
     - You can configure it to use an AWS KMS Customer Master Key (CMK)
+- To configure X-Ray in your system **you'll need both X-Ray SDK and X-Ray daemon**
+    - Required for the services that doesn't have it built-in (i.e. EC2, ECS)
+    - X-Ray SDK send the data to the X-Ray daemon, which **buffers segments in a queue and uploads them to X-Ray in batches**
+    - High-level configuration for:
+        - On-prem and EC2: install the X-Ray daemon on the server
+        - Elastic Beanstalk: install the X-Ray daemon on the EC2 instances inside your environment
+        - ECS: install X-Ray daemon on **its own Docker container on your ECS cluster** alongside your app
+- You can add **annotations** when instrumenting your application to record additional information about requests
+    - Key-value pairs
+    - Annotations are indexed for use with filter expressions, so you can search for traces that contain specfici data and group related traces together in the console
