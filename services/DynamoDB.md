@@ -54,7 +54,7 @@ Its flexible data model and reliable performance make it a great fit for mobile,
             - **2x Eventually Consistent Reads of 4KB per second** (**default**)
     - The more capacity units you provision, the more you pay
     - When your request rate is higher than the reat/write capacity povisioned on your table, you'll get a `ProvisionedThroughputExceededException`
-        - The SDK will automatically retry the requests until it succeeds
+        - **AWS SDK will automatically retry** the requests until it succeeds, using **jitter based bacoff algorithm**
         - If you are not using the SDK you can reduce the request frequency or use an **exponential backoff**, by using progressively longer waits
 - You also have an option to use **On-Demand Capacity**
     - Charges apply for reading, writing and storing data, and you pay for only what you use (per request)
@@ -78,6 +78,7 @@ Its flexible data model and reliable performance make it a great fit for mobile,
         - Temporary data
     - Reduces costs by automatically removing data which is no longer relevant
     - Is expressed in epoch/unix timestamp
+    - You can choose any column name, as long as it is a timestamp
 - **DynamoDB Stream** is a time-ordered sequence of item level modifications (insert, update, delete)
     - The modifications are **recorded as logs**, which are **encrypted at rest** and **stored for 24 hours**
     - Can be used for auditing, replaying transactions in different tables, and triggering events based on changes, such as a lambda function
@@ -85,7 +86,7 @@ Its flexible data model and reliable performance make it a great fit for mobile,
     - The **primary key is recorded by default**, but you can capture before and after images
     - Events are recorded in near real-time
     - Applications can take actions based on contents
-    - Lambda polls DynamoDB stream, and can execute code based on the stream event
+    - **Lambda polls DynamoDB stream**, and can execute code based on the stream event
 
 
 ## Query vs Scan
@@ -104,3 +105,5 @@ Its flexible data model and reliable performance make it a great fit for mobile,
     - **Avoid using scan operations** if you can: design tables in a way that you can use Query, Get or BatchGetItem
     - By default, a scan operation processes data sequentially, in batches of 1MB. Use **parallel scans** instead by logically dividing a table or index into segments and scanning each segment in parallel
         - **Avoid parallel scans** if your table or index is already incurring heavy read/write activity from other applications
+- **BatchGetItem** allows you to pass **multiple Partition Key values in a single request**
+    - **Query does not support this**

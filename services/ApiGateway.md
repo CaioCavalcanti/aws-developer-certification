@@ -20,7 +20,13 @@ Is a fully managed service that makes it easy for developers to publish, maintai
 - Comes with API Gateway default domain, but you can use **custom domain** as well
 - Supports **AWS Certificate Manager** for SSL/TLS certificates
 - You can enable **API Caching** to cache your endpoint's response to **reduce the number of calls** made to your endpoint and also **improve latency**
+    - You can flush the entire API stage cache if necessary from the console
+    - You can let a client of your API invalidate an existing cache entry, using header `Cache-Contro: max-age=0`
+        - Use **Require authorization** option to block this capability, so only authorized clients/resources can invalidate cache
 - When using JS/AJAX that uses multiple domains with API Gateway, ensure that **CORS is enabled**
+    - You need to configure CORS on API Gateway and on your backend
+    - **You Lambda** is responsible for returning the `Access-Control-Allow-Origin` and `Access-Control-Allow-Headers` headers, because a proxy integration doesn't return an integration response
+    - You need to setup an `OPTIONS` method with the required response in API Gateway
 - You can use **API Gateway Import API** feature to import an API from an external definition file into API Gateway.
     - Supports Swagger v2.0 definition files
 - **API Throttling**
@@ -29,3 +35,11 @@ Is a fully managed service that makes it easy for developers to publish, maintai
     - If you go over the limit you will receive a **429 Too Many Requests** error response
     - You can throttle using individual API keys, limiting individual clients
 - You can use API Gateway as a **SOAP web service passthrough**
+- CORS requests can be:
+    - **Simple requests**
+        - Issued against an API resource that allows only `GET`, `HEAD` and `POST` requests
+        - If is a `POST` request, it must include an `Origin` header
+        - Payload content type is `test/plain`, `multipart/form-data` or `application/x-www-form-urlencoded`
+        - Does not contain custom headers
+    - All other requests are **non-simple requests**
+        - **If your API's resource receive non-simple requests, you need to enable CORS**

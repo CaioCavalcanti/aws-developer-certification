@@ -34,6 +34,14 @@ Developers can focus on writing code and don't need to worry about any of the un
 - Supports deployment of **Docker containers**
     - **Single container**: runs the Docker container on an EC2 instance provisioned by Elastic Beanstalk
     - **Multiple containers**: Elastic Beanstalk will build an ECS cluster and deploy multiple Docker containers on each instance
+- During environment creation, configuration options are applied from multiple sources with the following precedence, from highest to lowest:
+    - Settings applied directly to the environment: settings specified during create or update environment operation from the API by any client, AWS Console, EB CLI, AWS CLI and SDKs
+        - AWS Console and EB CLI also apply [recommended values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html#configuration-options-recommendedvalues) for some options that apply at this level, unless overridden
+    - Saved configurations: settings from any options that are not applied directly to the environment are loaded from saved configuration (available in S3 for example), if specified
+    - Configuration files: settings that are not applied directly in the environment and also not specified in a saved configuration, are loaded from configuration files available in the  `.ebextensions` directory at the root of the application source bundle
+        - Configuration files are **executed in alphabetical order**
+    - Default values: if a configuration option has a default value, it only applies when the option is not set at any of the above steps
+- **Settings in configuration files are not applied directly** to the environment and **cannot be removed without modifying the configuration files and deploying a new application version**.
 
 ## Deployment policies
 - **All at once**

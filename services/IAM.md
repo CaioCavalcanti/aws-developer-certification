@@ -85,6 +85,8 @@ IAM makes is easy to provide users secure access to your AWS resources, by enabl
     - Validate that the policy works as expected
     - Test policies already attached yo existing users
         - Great for troubleshooting an issue which you suspect is IAM related
+- You use different types of security credentials depending on how you interact with AWS. For example, you use a user name and password to sign in to the AWS Management Console. You use access keys to make programmatic calls to AWS API operations or to use AWS CLI commands.
+    - When working on development, you need to use AWS access keys to work with AWS resources
 
 ## Critical Terms
 - Users: end users (people)
