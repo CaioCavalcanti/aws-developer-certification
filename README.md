@@ -5,10 +5,25 @@ Preparation and study material to become AWS Certified Developer Associate
 - [AWS - Certified Developer Associate Overview](https://aws.amazon.com/certification/certified-developer-associate/)
 - [AWS - Certified Developer–Associate (DVA-C01) Examination Guide](https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_Certified_Developer_Associate-Exam_Guide_EN_1.4.pdf)
 - [AWS - Whitepapers](https://aws.amazon.com/whitepapers)
+    - [Practicing Continuous Integration and Continuous Delivery on AWS](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+    - [Blue/Green Deployments on AWS](https://d1.awsstatic.com/whitepapers/AWS_Blue_Green_Deployments.pdf)
+    - [Practicing Continuous Integration and Continuous Delivery on AWS](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+    - [Introduction to DevOps on AWS](https://d1.awsstatic.com/whitepapers/AWS_DevOps.pdf)
+    - [Docker on AWS](https://d1.awsstatic.com/whitepapers/docker-on-aws.pdf)
+    - [Running Containerized Microservices on AWS](https://d1.awsstatic.com/whitepapers/DevOps/running-containerized-microservices-on-aws.pdf)
+    - [Implementing Microservices on AWS](https://d0.awsstatic.com/whitepapers/microservices-on-aws.pdf)
+    - [Streaming Data Solutions on AWS with Amazon Kinesis](https://d0.awsstatic.com/whitepapers/whitepaper-streaming-data-solutions-on-aws-with-amazon-kinesis.pdf)
+    - [Serverless Architectures with AWS Lambda](https://d1.awsstatic.com/whitepapers/serverless-architectures-with-aws-lambda.pdf)
+    - [Building Scalable, Reliable Amazon EC2 Applications with Amazon SQS](http://sqs-public-images.s3.amazonaws.com/Building_Scalabale_EC2_applications_with_SQS2.pdf)
+    - [AWS Security Best Practices](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
+    - [Optimizing Enterprise Economics with Serverless Architectures](https://d1.awsstatic.com/whitepapers/optimizing-enterprise-economics-serverless-architectures.pdf)
+- AWS re:Invent Videos
+    - [AWS re:Invent 2018: [REPEAT 2] Serverless Architectural Patterns and Best Practices (ARC305-R2)](https://www.youtube.com/watch?v=08AjVGGQaKQ)
 - [AWS - Exam Readiness: AWS Certified Developer - Associate](https://www.aws.training/Details/Curriculum?id=19185) (Free online course)
 - [AWS Training](https://www.aws.training/)
 - [Udemy Course - AWS Certified Developer - Associate 2020](https://www.udemy.com/course/aws-certified-developer-associate/)
 - [Whizlab Practice Tests - AWS Certified Developer Associate](https://www.whizlabs.com/aws-developer-associate/practice-tests/)
+- [AWS Stash](https://awsstash.com/)
 
 ## Study plan
 1. Start with the [exam blueprint](https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_Certified_Developer_Associate-Exam_Guide_EN_1.4.pdf), so you are aware of:

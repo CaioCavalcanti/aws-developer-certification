@@ -6,7 +6,6 @@ Kinesis is a platform on AWS to work with streaming data, making it easy to coll
 - [AWS - Kinesis Data Streams FAQs](https://aws.amazon.com/kinesis/data-streams/faqs)
 - [AWS - Kinesis Firehose FAQs](https://aws.amazon.com/kinesis/data-firehose/faqs)
 - [AWS - Kinesis Data Analytics FAQs](https://aws.amazon.com/kinesis/data-analytics/faqs)
-- [Streaming Data Solutions on AWS with Amazon Kinesis whitepaper](https://d0.awsstatic.com/whitepapers/whitepaper-streaming-data-solutions-on-aws-with-amazon-kinesis.pdf)
 - [YouTube - AWS re:Invent 2017: Real-Time Streaming Applications on AWS: Use Cases and Patterns (ABD203)](https://www.youtube.com/watch?v=r06aJcTYql8)
 
 ## General Notes

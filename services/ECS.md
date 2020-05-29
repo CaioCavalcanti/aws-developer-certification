@@ -3,8 +3,6 @@ ECS is a fully managed container orchestration service.
 
 ## Useful Links
 - [AWS - ECS FAQs](https://aws.amazon.com/ecs/faqs/)
-- [Running Containerized Microservices on AWS whitepaper](https://d1.awsstatic.com/whitepapers/DevOps/running-containerized-microservices-on-aws.pdf)
-- [Implementing Microservices on AWS whitepaper](https://d0.awsstatic.com/whitepapers/microservices-on-aws.pdf)
 
 ## General Notes
 - You can run containers on EC2 instances or serverless with Fargate

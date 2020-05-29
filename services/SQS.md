@@ -7,7 +7,6 @@ You can use SQS to send, store and receive messages between software components 
 - [AWS - SQS FAQs](https://aws.amazon.com/sqs/faqs/)
 - [AWS - Best Practices for Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-best-practices.html)
 - [AWS - Amazon SQS security best practices](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-security-best-practices.html)
-- [Building Scalable, Reliable Amazon EC2 Applications with Amazon SQS whitepaper](http://sqs-public-images.s3.amazonaws.com/Building_Scalabale_EC2_applications_with_SQS2.pdf)
 
 
 ## General Notes
