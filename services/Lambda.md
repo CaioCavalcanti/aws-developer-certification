@@ -9,6 +9,7 @@ Lets you run your code without provisioning or managing servers or containers, y
 - [YoutTube - Start Right: Automate Your Serverless Application Deployments Using AWS SAM](https://www.youtube.com/watch?v=0o3urdBeoII)
 - [AWS Online Tech Talks - Optimizing Lambda Performance for Your Serverless Application](https://pages.awscloud.com/Optimizing-Lambda-Performance-for-Your-Serverless-Applications_2020_0316-SRV_OD.html)
 - [AWS Online Tech Talks - Choosing Events, Queues, Topics, and Streams in Your Serverless Application](https://pages.awscloud.com/Choosing-Events-Queues-Topics-and-Streams-in-Your-Serverless-Application_2020_0420-SRV_OD.html)
+- [AWS - AWS Lambda limits](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 
 ## General Notes
 - Brief history:
@@ -60,6 +61,66 @@ Lets you run your code without provisioning or managing servers or containers, y
             - The lambda execution role needs permission to create the ENIs
         - Lambda uses this info to setup an Elastic Network Interface (ENI) using an available IP address from your subnet
     - `aws lambda update-function-configuration --function-name my-function --vpc-config SubnetIds=subnet-123abc,SecurityGroupIds=sg-123456`
+- For an initial **burst** of traffic, your functions' cumulative concurrency in a region can reach an initial leve of between 500 and 300 (varies per region)
+    - After the initial burst, your functions' concurrency can scale by an additional 500 instances each minute
+        - This continues until there are enough instances to serve all requests or until a concurrency limit is reached (returns 429 in this case)
+- To enable functions to scale without fluctuations in latency and **avoid cold start, use provisioned concurrency**
+    - This is useful for functions that take a long time to initialize or require extremely low latency for all invocations
+    - Provisioned concurrency enables you to pre-initialize instances of your function and keep them running at all times
+    - Lambda integrates with Application Auto Scaling to support autoscaling for provisioned concurrency based on utilization
+    - You can use provisioned concurrency on a version or alias
+
+## Best Practices
+- Function Code
+    - **Separate the lambda handler from your core logic**
+        - This allows you to make a more unit-testable function
+    - **Take advantage of execution context reuse to improve the performance of your function**
+        - Initialize SDK clients and database connections outside of the function handler and cache static assets in the `/tmp` directory, subsequent invocations processed by the same instance of your function can reuse these resources, saving execution time and cost
+        - To avoid potential data leaks across invocations, **don't use the execution context to store user data, events or other information with security implications**.
+    - **Use environment variables to pass operational parameters to your function**
+        - For example, passing the S3 bucket name as environment variable instead of hard-coding it
+    - **Control the dependencies in your function's deployment package**
+        - Lmbda execution environment contains a number of libraries that are periodically updated. These updates might introduce breaking changes on your function. To have full control of the dependencies of your function, package all your dependencies with your deployment package
+    - **Minimize your deployment package size to its runtime necessities**
+        - This reduce the time taken for your deployment package to be downloaded and unpacked ahead of invocation
+    - **Reduce the time it take Lambda to unpack deployment packages**
+    - **Minimize the complexity of your dependencies**
+        - Prefer simple frameworks that load quickly on execution context startup
+    - **Avoid using recursive code**
+        - Prevent the case where the function invokes itself, this could lead to unintended volume of invocations and escalated costs
+        - If you accidentally do so, set the function concurrent execution limit to 0 so it immediately throttle all invocations while you update the code
+- Function Configuration
+    - **Run performance tests to find the optimum memory size**
+        - Any increase in memory size triggers an equivalent increase in CPU available to your function
+        - The memory usage for your function is determined per-invoke and can be viewed on CloudWatch logs
+        - By analyzing the `Max Memory Used:` field you can determine if your function needs more memory or if you over-provisioned memory
+    - **Run load tests to find the optimum timeout value**
+        - This can help you determine any problems with a dependency service that may increase the concurrency of the function beyond what you expect
+        - This is especially important when your function makes network calls to resources that may not handle Lambda's scaling
+    - **Use most-restrictive permissions when setting IAM policies**
+        - Understand the resources and operations your function needs and limit the execution role to these permissions
+    - **Be familiar with Lambda limits**
+        - Payload size, file descriptors and `/tmp` scape are often overlooked when determining runtime resource limits
+    - **Delete Lambda functions that you are no longer using**
+        - By doing so, the unused functions won't needlessly count against your deployment package size limit
+    - **Ensure the function execution timeout doesn't exceed the SQS queue visibility timeout**
+        - This applies both to `CreateFunction` and `UpdateFunctionConfiguration`
+        - For `CreateFunction` it will fail the creation process
+        - For `UpdateFunctionConfiguration` it could result in duplicate invocations of the function
+- Alarming and Metrics
+    - **Use Lambda function metrics and CloudWatch alarms**
+    - **Leverage your logging library and Lambda metrics and dimensions to catch app errors**
+- Stream Event Invokes
+    - **Test with different batch and record sizes**
+        - This way the polling frequency of each event source is tuned to how quickly your function is able to complete its task
+        - `BatchSize` controls the maximum number of records that can be sent to your function with each invoke
+        - A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing the throughput
+    - **Increase Kinesis stream processing troughput by adding shards**
+        - Lambda will poll each shard with at most once concurrent invocation
+        - Increasing the number of shards will directly increase the number of maximum concurrent function invocations, increasing Kinesis throughput
+        - If you are increasing the number of shards, **make sure you have picked a good partition key** for you data, so that **related records end up on the same shards and data is well distributed**
+    - **Use CloudWatch on IteratorAge metric**
+        - This can help you determine if your Kinesis stream is being processed
 
 ## Triggers
 - Services that **Lambda reads event from**:
@@ -102,3 +163,58 @@ Lets you run your code without provisioning or managing servers or containers, y
 - You can set **alias** to a specific version and use it to map different stages, such as **PROD**, **QA** and **DEV** for example, remapping the alias as you promote changes between environments
     - You can **shift traffic** between two versions, based on weights (%), this is useful for **A/B testing/Blue-Green deployments**
     - Cannot split traffic using $LATEST, you'll need to create an alias to latest
+
+## Monitoring
+- Lambda automatically monitors functions on your behalf, reporting metrics to CloudWatch
+- When your function finishes processing an event, Lambda sends metrics about the invocation to CloudWatch
+- The timestamp on a metrics reflects when the function was invoked
+    - There might be a delay when you see the metrics because of the function execution timeout
+- **Invocation Metrics**
+    - Binary indicators of the outcome of a function
+    - Metrics should be viewed with the `Sum` statistic
+    - `Invocations`
+        - Number of times your function is executed, including both successful and failed executions
+        - It isn't recorded if the invocation request is throttled or resulted in an invocation error
+        - This equals the number of requests billed
+    - `Errors`
+        - Number of invocations that result in a function error
+        - It can be an error on your code or on the Lambda runtime (timeouts or configuration errors)
+        - You can get the error rate with `Error / Invocations`
+    - `DeadLetterErrors`
+        - For asynchronous invocation, the number of times Lambda attempts to send an event to a dead-letter queue but fails
+        - Can occur due to permission errors, misconfigured resources or size limits
+    - `DestinationDeliveryFailures`
+        - For asynchronous invocation, the number of times Lambda attempts to send an event to a destination but failss
+        - Can occur due to permission errors, misconfigured resources or size limits
+    - `Throttles`
+        - Number of invocation requests that are throttled
+        - There is no concurrency available to scale up and Lambda rejects additional requests with `TooManyRequestsException`
+        - Throttled requests and other invocation errors don't count as `Invocations` or `Errors`
+    - `ProvisionedConcurrencyInvocations`
+        - The number of times your function is executed on provisioned concurrency
+    - `ProvisionedConcurrencySpillOverInvocations`
+        - The number of times your function is executed on standard concurrency when all provisioned concurrency is in use
+- **Performance Metrics**
+    - Provide performance detail about a single invocation
+    - `Duration`
+        - The amount of time your function spends processing an event
+        - For the first event processed by an instance of your function, this **includes initialization time**
+        - The billed duration of an ivocation is the `Duration` rounded up to the nearest 100 miliseconds
+        - Supports percentile statistics, so you can exclude outlier values that skew average and maximum statistics
+    - `IteratorAge`
+        - For event source mappings that read from streams, the age of the last record in the event
+        - The age is the amount of time between when the stream receives the record and when the event source mapping sends the event to the function
+        - When troubleshooting real time apps that are facing delay, this metric should be checked first
+        - In general, this value increases when a function can't keep up with processing the amount of data that's being written to the streams
+- **Concurrency Metrics**
+    - Concurrency metrics are reported as an **aggregate count of the number of instances** processing events across a function, version alias or AWS region
+    - To see how close you are from hitting concurrency limits, view these metrics with the `Max` statistic
+    - `ConcurrentExecutions`
+        - The number of function instances that are processing events
+    - `ProvisionedConcurrentExecutions`
+        - The number of function instances that are processing events on provisioned concurrency
+        - For each invocation of an alias or version with provisioned concurrency, Lambda emits the current count
+    - `ProvisionedConcurrencyUtilization`
+        - For a version or alias, the value of `ProvisionedConcurrentExecutions` divided by the total amount of provisioned concurrency allocated
+    - `UnreservedConcurrentExecutions`
+        - For an AWS region, the number of events that are being processed by functions that don't have reserved concurrency
