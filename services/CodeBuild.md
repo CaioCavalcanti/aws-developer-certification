@@ -10,6 +10,8 @@ CodeBuild is a fully managed continuous integration service that compiles source
     - File should be on the root directory, otherwise you need to provide the path where it is stored
     - You can **override** the `buildspec.yml` file if necessary, using a different buildspec file or storing it in a **different directory or in a S3 bucket**
         - The S3 bucket needs to be **on the same region** as the build project
+        - You can override when starting the build from AWS CLI, with the `buildspecOverride` property set to the new buildspec.yml file. This is useful when you **have access to run the build, but not to the project where the default buildspec.yml is stored**
+          - You can pass an inline build spec definition or point to a alternate build spec file relative to the built-in `CODEBUILD_SRC_DIR` environment variable
 - You can view the full log in CloudWatch
 - You can setup notifications
 - Pricing:

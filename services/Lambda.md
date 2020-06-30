@@ -153,7 +153,7 @@ Lets you run your code without provisioning or managing servers or containers, y
 ## Vesion Control
 - You can publish one or more versions of your Lambda function
 - These versions can be used as different stages of your development workflow, such as development, qa and production
-- Each Lambda function has an **unique Amazon Resource Name (ARN)**, after publishing a version, **it is immutable**
+- Each Lambda function has an **unique Amazon Resource Name (ARN)**, after publishing a version, **it is immutable** (code and configuration)
 - The latest function code is in **$LATEST version**, when you update your function code, it **replaces the code in $LATEST**
 - You can refer to a Lambda function using its ARN. There are two types of ARN associated with the latest version
     - **Qualified ARN**: the function ARN with the version suffix

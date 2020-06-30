@@ -43,3 +43,7 @@ Is a fully managed service that makes it easy for developers to publish, maintai
         - Does not contain custom headers
     - All other requests are **non-simple requests**
         - **If your API's resource receive non-simple requests, you need to enable CORS**
+- Supports **AWS WAF** to protect from attacks such as SQL injection and Cross-Site Scripting (XSS)
+- Key concepts:
+    - **API endpoint**: the hostname for an API that is deployed to a specific region, in the form of `{api-id}.execute-api.{region}.amazonaws.com`
+        - Supports edge-optimized, private and regional API endpoints

@@ -5,6 +5,7 @@ It's a web service that makes it easy to deploy, operate and scale in-memory cac
 - [AWS - ElastiCache FAQ](https://aws.amazon.com/elasticache/faqs/)
 - [AWS - ElastiCache for Redis - Caching Strategies and Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html)
 - [AWS - ElastiCache for Memcached - Caching Strategies and Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/BestPractices.html)
+- [AWS - Comparing Redis and Memcached](https://aws.amazon.com/elasticache/redis-vs-memcached/)
 - [Memcached](https://memcached.org/)
 - [Redis](https://redis.io/)
 
@@ -28,7 +29,7 @@ It's a web service that makes it easy to deploy, operate and scale in-memory cac
     - Use cases:
         - Object caching is the ultimate goal, for example to offload the database
         - Caching model as simple as possible
-        - Large cache nodes, requiring multithreaded performance with utilization of multiple cores
+        - Large cache nodes, requiring **multithreaded performance** with utilization of **multiple cores**
         - Ability to scale out
 - **TTL** specifies the number of seconds until the data expires, to avoid keeping stale data in the cache. It does not elimitate stale data, but helps avoid it
 - Caching strategies

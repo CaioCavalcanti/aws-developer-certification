@@ -54,6 +54,8 @@ IAM makes is easy to provide users secure access to your AWS resources, by enabl
 - Do not share access keys and secrets, create one per user
 - If you publish your key and secret by mistake on github, assume that it is compromised and reveoke it right away, as there are bots scanning repositories to get keys/secrets
 - **Roles** allow you to not use access key id and secret and **are preferred from a security perspective**
+    - The permissions of your IAM user and any roles that you assume are not cumulative, **only a set of permissions is active at a time**
+    - When you assume a role, you temporarily give up your previous user or role permissions and work with the permissions that are assigned to the role. When you exit the role, your user permissions are automatically restored
 - Changes on a policy take effect immediately
 -  **Web Identity Federation** lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider (IdP), such as Amazon, Facebook or Google
     - Following a successful authentication, the user receives an authentication code from the IdP, which they can trade for temporary AWS security credentials
@@ -76,7 +78,7 @@ IAM makes is easy to provide users secure access to your AWS resources, by enabl
         - When you delete the user, group or role in which the inline policy is embedded, **the policy will also be deleted**
         - In most cases, AWS recommends using managed policies over inline policies
         - This policy is useful when you want to **be sure that the permissions in the policy are not inadvertently assigned to any other user, group or role** than the one for which it was created
-    - Provices **Security Token Service (STS)** web service to **request temporary, limited-privilege credentials for IAM users or federated users.
+    - Provices **Security Token Service (STS)** web service to **request temporary, limited-privilege credentials** for IAM users or federated users.
     - One of the STS actions is `AssumeRoleWithWebIdentity`, which returns temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider, such as Cognito, Amazon, Facebook, Google or any OIDC-compatible identity provider
         - By default, the security credentials created by `AssumeRoleWithWebIdentity` **last for one hour**, but you can configure it using the parameter `DurationSeconds`, from 15 minutes up to the maximum session duration setting for the role, which can be from 1 hour to 12 hours.
         - The token created returns `AssumedRoleUser` ARN and `AssumedRoleID`, which are used to reference the temporary credentials, instead of an IAM role or user
@@ -87,6 +89,8 @@ IAM makes is easy to provide users secure access to your AWS resources, by enabl
         - Great for troubleshooting an issue which you suspect is IAM related
 - You use different types of security credentials depending on how you interact with AWS. For example, you use a user name and password to sign in to the AWS Management Console. You use access keys to make programmatic calls to AWS API operations or to use AWS CLI commands.
     - When working on development, you need to use AWS access keys to work with AWS resources
+- To **assume a role**, an application calls AWS **STS AssumeRole API** operation and passes the ARN of the role to use
+    - When you call this API you can pass an optional JSON policy to restrict permissions (not possible to grant permissions in excess of those allowed by the role assumed)
 
 ## Critical Terms
 - Users: end users (people)
